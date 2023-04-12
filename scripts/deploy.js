@@ -7,16 +7,13 @@
 const hre = require("hardhat");
 
 async function main() {
- 
+  
+  const ChatApp = await hre.ethers.deployContract("ChatApp");
 
-  const lock = await hre.ethers.deployContract();
-
-  await lock.waitForDeployment();
+  await ChatApp.waitForDeployment();
 
   console.log(
-    `Lock with ${ethers.formatEther(
-      lockedAmount
-    )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.target}`
+    `Contract Address: ${ChatApp.target}`
   );
 }
 
