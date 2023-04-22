@@ -70,7 +70,7 @@ export const ChatAppProvider = ({children}) =>{
     //CREATE ACCOUNT
     const createAccount = async ({name,accountAddress})=>{
         try{
-            if(name || accountAddress) return setError("Please Fill All the Field");
+            // if(name || accountAddress) return setError("Please Fill All the Field");
             const contract = await connectingWithContract();
             const getCreatedUser = await contract.createAccount(name);
             setLoading(true);
