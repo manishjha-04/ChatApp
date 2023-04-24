@@ -114,15 +114,16 @@ const NavBar = () => {
 
     {/* MODAL COMPONENT  */}
 
-    {openModel && (
+    {openModal && (
       <div className={Style.modelBox}>
-      <Model openModel= {setOpen(openModel)} 
+      <Model openBox= {setOpenModal} 
         title = "WELCOME TO"
         head = "CHAT BUDDY"
         info='lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
         smallInfo = "Please Enter Your Name"
-        images = {images.hero}   
+        image = {images.hero}   
         functionName = {createAccount}
+        address={account}
 
       />
 
