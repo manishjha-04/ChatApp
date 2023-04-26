@@ -1,0 +1,76 @@
+.Filter{
+    width:80%;
+    margin: 1rem auto;
+}
+
+.Filter_box{
+    display: flex;
+    justify-content: space-between;
+}
+
+.Filter_box_left_search{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: rgba(0,0,0,0.25);
+    padding-inline: 1rem;
+    border-radius: 2rem;
+    color: #F18303;
+}
+
+.Filter_box_left_search input{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 1rem;
+    color: #F18303;
+    width: 20rem;
+}
+
+.Filter_box_right{
+    display: flex;
+    gap: 1rem;
+}
+
+.Filter_box_right button{
+    background-color: rgba(0,0,0,0.25);
+    border: none;
+    outline: none;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    color: #F18303;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.Filter_model{
+    position: relative;
+    inset: 0 0 0 0 ;
+    background-color: #292F3F;
+    z-index: 22222222222;
+
+
+}
+
+@media only screen and (max-width:35em){
+    .Filter{
+        width: 90%;
+    }
+    .Filter_box{
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .Filter_box_left_search{
+        width: 100%;
+    }
+    
+    .Filter_model{
+        position: absolute;
+        inset: 0 0 -70% 0 ;
+    } 
+    .Filter_box_right button{
+        font-size: .5rem;
+    }
+}

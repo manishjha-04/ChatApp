@@ -32,7 +32,7 @@ export const ChatAppProvider = ({children}) =>{
             //GET CONTRACT
             const contract = await connectingWithContract();
             //GET ACCOUNT
-            const connectAccount = await connectWallet();
+            const connectAccount = await ConnectWallet();
             setAccount(connectAccount);
             //SET USER NAME
             const userName = await contract.getUserName(connectAccount);
@@ -48,6 +48,7 @@ export const ChatAppProvider = ({children}) =>{
 
         }catch(err){
             setError("Please Install and Connect Your Wallet");
+            console.log(err);
         }
     };
     useEffect(()=>{
@@ -70,7 +71,7 @@ export const ChatAppProvider = ({children}) =>{
     //CREATE ACCOUNT
     const createAccount = async ({name,accountAddress})=>{
         try{
-            // if(name || accountAddress) return setError("Please Fill All the Field");
+            if(name || accountAddress) return setError("Please Fill All the Field");
             const contract = await connectingWithContract();
             const getCreatedUser = await contract.createAccount(name);
             setLoading(true);
@@ -88,7 +89,7 @@ export const ChatAppProvider = ({children}) =>{
    //ADD YOUR FRIEND
    const addFriends = async ({name,accountAddress})=>{
     try{
-        // if(name || accountAddress) return setError("Please Fill All the Field");
+        if(name || accountAddress) return setError("Please Fill All the Field");
 
         const contract = await connectingWithContract();
         const addMyFriend = await contract.addFriend(accountAddress,name);
