@@ -47,8 +47,10 @@ export const ChatAppProvider = ({children}) =>{
 
 
         }catch(err){
-            // setError("Please Install and Connect Your Wallet");
-            console.log(err);
+            setError("Please Install and Connect Your Wallet");
+            // console.log(err);
+            // console.log("Error message:", err.message); // Print the error message for further debugging
+
         }
     };
     useEffect(()=>{
@@ -69,11 +71,17 @@ export const ChatAppProvider = ({children}) =>{
     }
 
     //CREATE ACCOUNT
+
     const createAccount = async ({name})=>{
+        console.log(name,account,"hello abc");
         try{
-            if(!name || !account) return setError("Please Fill All the Field");
+            if(!name || !account) 
+                return setError("Please Fill All the Field");
+            
             const contract = await connectingWithContract();
-            const getCreatedUser = await contract.createAccount(name);
+            console.log(contract);
+            const getCreatedUser = await contract.createAccount({name});
+
             setLoading(true);
             await getCreatedUser.wait();
             setLoading(false);
@@ -82,6 +90,7 @@ export const ChatAppProvider = ({children}) =>{
            
         }catch(err){
             setError("Error While creating your account please reload the browser");
+            console.log(err);
         }
     }
 
@@ -89,7 +98,7 @@ export const ChatAppProvider = ({children}) =>{
    //ADD YOUR FRIEND
    const addFriends = async ({name,accountAddress})=>{
     try{
-        if(!name || !userAddress) return setError("Please provide data");
+        if(!name || !accountAddress) return setError("Please provide data");
 
         const contract = await connectingWithContract();
         const addMyFriend = await contract.addFriend(accountAddress,name);
@@ -108,7 +117,7 @@ export const ChatAppProvider = ({children}) =>{
    //send message to friend
     const sendMessage = async ({msg,address})=>{
         try{
-            if(msg || address) return setError("Please Type Your Message");
+            if(!msg || !address) return setError("Please Type Your Message");
             const contract = await connectingWithContract();
             const addMessage = await contract.sendMessage(address,msg);
             setLoading(true);
@@ -125,7 +134,7 @@ export const ChatAppProvider = ({children}) =>{
         const contract = await connectingWithContract();
         const userNames = await contract.getUserName(accountAddress);
         setCurrentUserName(userNames);
-        setCurrentUserAddress(userAddress);
+        setCurrentUserAddress(accountAddress);
 
 
     }

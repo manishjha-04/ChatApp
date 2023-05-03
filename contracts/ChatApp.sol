@@ -60,6 +60,7 @@ contract ChatApp {
         function getUserName(address pubkey) external view returns(string memory){
             require(checkUserExists(pubkey) , "User does not exist");
             return userList[pubkey].name;
+            
         }
 
         //Add friend
@@ -145,7 +146,7 @@ contract ChatApp {
         }
 
 
-    function getAllUsersList() public view returns(AllUserStruck[] memory){
+    function getAllAppUser() public view returns(AllUserStruck[] memory){
         return getAllUsers;
     }
     

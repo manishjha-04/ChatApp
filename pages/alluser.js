@@ -15,7 +15,7 @@ const alluser = () => {
 
     </div>
       
-      <div className={Style.alluser_cards}> 
+      <div className={Style.alluser}> 
       {userLists.map((el,i)=>(
         <UserCard key={i+1} el={el} i={i} addFriends={addFriends}/>
       ))}
@@ -24,4 +24,4 @@ const alluser = () => {
   )
 }
 
-export default alluser
+export default alluser;

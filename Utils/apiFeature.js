@@ -8,7 +8,7 @@ export const  CheckIfWalletIsConnected = async () => {
     try{
         if(!window.ethereum) return console.log("Install Metamask");
 
-        const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+        const accounts = await window.ethereum.request({ method: "eth_accounts", });
 
         const firstAccount = accounts[0];
         return firstAccount;
@@ -23,7 +23,7 @@ export const connectWallet = async () => {
     try{
         if(!window.ethereum) return console.log("Install Metamask");
 
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const accounts = await window.ethereum.request({ method: "eth_requestAccounts", });
 
         const firstAccount = accounts[0];
         return firstAccount;

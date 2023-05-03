@@ -7,6 +7,7 @@ import images from "../../assets";
 
 
 const UserCard = ({el,i,addFriends}) => {
+  console.log(el);
   return (
     <div className={Style.UserCard}>
     <div className={Style.UserCard_box}>
