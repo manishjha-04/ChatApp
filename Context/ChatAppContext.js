@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { useRouter } from 'next/router'
-import { CheckIfWalletIsConnected,ConnectWallet,connectingWithContract } from '@/Utils/apiFeature'
+import { CheckIfWalletIsConnected,connectWallet,connectingWithContract } from '@/Utils/apiFeature'
 
 export const ChatAppContext = React.createContext();
 
@@ -32,7 +32,7 @@ export const ChatAppProvider = ({children}) =>{
             //GET CONTRACT
             const contract = await connectingWithContract();
             //GET ACCOUNT
-            const connectAccount = await ConnectWallet();
+            const connectAccount = await connectWallet();
             setAccount(connectAccount);
             //SET USER NAME
             const userName = await contract.getUserName(connectAccount);
@@ -47,7 +47,7 @@ export const ChatAppProvider = ({children}) =>{
 
 
         }catch(err){
-            setError("Please Install and Connect Your Wallet");
+            // setError("Please Install and Connect Your Wallet");
             console.log(err);
         }
     };
@@ -69,9 +69,9 @@ export const ChatAppProvider = ({children}) =>{
     }
 
     //CREATE ACCOUNT
-    const createAccount = async ({name,accountAddress})=>{
+    const createAccount = async ({name})=>{
         try{
-            if(name || accountAddress) return setError("Please Fill All the Field");
+            if(!name || !account) return setError("Please Fill All the Field");
             const contract = await connectingWithContract();
             const getCreatedUser = await contract.createAccount(name);
             setLoading(true);
@@ -89,7 +89,7 @@ export const ChatAppProvider = ({children}) =>{
    //ADD YOUR FRIEND
    const addFriends = async ({name,accountAddress})=>{
     try{
-        if(name || accountAddress) return setError("Please Fill All the Field");
+        if(!name || !userAddress) return setError("Please provide data");
 
         const contract = await connectingWithContract();
         const addMyFriend = await contract.addFriend(accountAddress,name);
@@ -121,9 +121,9 @@ export const ChatAppProvider = ({children}) =>{
     }
 
     //READ INFO
-    const readUser = async (userAddress)=>{
+    const readUser = async (accountAddress)=>{
         const contract = await connectingWithContract();
-        const userNames = await contract.getUserName(userAddress);
+        const userNames = await contract.getUserName(accountAddress);
         setCurrentUserName(userNames);
         setCurrentUserAddress(userAddress);
 
@@ -139,7 +139,7 @@ export const ChatAppProvider = ({children}) =>{
         <ChatAppContext.Provider value={{readMessage,createAccount,addFriends,sendMessage,readUser
         ,account,userName,friendList,
         friendMsg,loading,userLists,error,
-        currentUserName,currentUserAddress,ConnectWallet,CheckIfWalletIsConnected
+        currentUserName,currentUserAddress,connectWallet,CheckIfWalletIsConnected
         }}>
             {children}
         </ChatAppContext.Provider>
