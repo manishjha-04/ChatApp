@@ -16,6 +16,8 @@ const alluser = () => {
     </div>
       
       <div className={Style.alluser}> 
+      {/* {console.log(userLists)} */}
+
       {userLists.map((el,i)=>(
         <UserCard key={i+1} el={el} i={i} addFriends={addFriends}/>
       ))}

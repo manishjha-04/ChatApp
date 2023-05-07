@@ -7,9 +7,12 @@ import images from "../../../assets";
 
 const Card = ({readMessage,el,i,readUser}) => {
   return (
+
     <Link href={{pathname:'/',query:{name:`${el.name}`,address:`${el.pubkey}`}}}>
 
     <div className={Style.Card} onClick={()=>(readMessage(el.pubkey),readUser(el.pubkey))}>
+    {/* <h2>i am name 2</h2> */}
+
     <div className={Style.Card_box}>
     <div className={Style.Card_box_left}>
         <Image 
@@ -21,6 +24,7 @@ const Card = ({readMessage,el,i,readUser}) => {
         </div>
         <div className={Style.Card_box_right}>
         <div className={Style.Card_box_right_middle}>
+        {/* <h2>i am name</h2> */}
         <h4>{el.name}</h4>
         <small>{el.pubkey.slice(21)}..</small>
 

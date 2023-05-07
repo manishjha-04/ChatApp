@@ -34,6 +34,7 @@ export const ChatAppProvider = ({children}) =>{
             //GET ACCOUNT
             const connectAccount = await connectWallet();
             setAccount(connectAccount);
+            
             //SET USER NAME
             const userName = await contract.getUserName(connectAccount);
             setUserName(userName);
@@ -42,13 +43,15 @@ export const ChatAppProvider = ({children}) =>{
             setFriendLists(friendLists);
             //GET ALL APP USER
             const userList = await contract.getAllAppUser();
+            // console.log(userList);
             setUserLists(userList);
 
 
 
-        }catch(err){
-            setError("Please Install and Connect Your Wallet");
-            // console.log(err);
+        }
+        catch(err){
+            // setError("Please Install and Connect Your Wallet");
+            console.log(err);
             // console.log("Error message:", err.message); // Print the error message for further debugging
 
         }
@@ -101,7 +104,7 @@ export const ChatAppProvider = ({children}) =>{
         if(!name || !accountAddress) return setError("Please provide data");
 
         const contract = await connectingWithContract();
-        const addMyFriend = await contract.addFriend(accountAddress,name);
+        const addMyFriend = await contract.addFriend({accountAddress,name});
         setLoading(true);
         await addMyFriend.wait();
         setLoading(false);
@@ -119,7 +122,7 @@ export const ChatAppProvider = ({children}) =>{
         try{
             if(!msg || !address) return setError("Please Type Your Message");
             const contract = await connectingWithContract();
-            const addMessage = await contract.sendMessage(address,msg);
+            const addMessage = await contract.sendMessage({address,msg});
             setLoading(true);
             await addMessage.wait();
             setLoading(false);
